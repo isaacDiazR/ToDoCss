@@ -1,0 +1,9 @@
+services:
+  todo-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pixel-todo-app
+    ports:
+      - "3000:8080"
+    restart: unless-stopped

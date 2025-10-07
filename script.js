@@ -11,19 +11,41 @@ class PixelTodoApp {
     }
 
     init() {
-        this.setupEventListeners();
-        this.loadTodos();
+        console.log('🎮 Inicializando PixelTodoApp...');
+        try {
+            this.setupEventListeners();
+            this.loadTodos();
+            console.log('✅ PixelTodoApp inicializada correctamente');
+        } catch (error) {
+            console.error('❌ Error al inicializar PixelTodoApp:', error);
+        }
     }
 
     setupEventListeners() {
+        console.log('🔧 Configurando event listeners...');
+        
+        // Verificar que los elementos existan antes de agregar listeners
+        const todoForm = document.getElementById('todo-form');
+        const editForm = document.getElementById('edit-form');
+        
+        if (!todoForm) {
+            console.error('❌ No se encontró el elemento #todo-form');
+            return;
+        }
+        
+        if (!editForm) {
+            console.error('❌ No se encontró el elemento #edit-form');
+            return;
+        }
+
         // Form submission
-        document.getElementById('todo-form').addEventListener('submit', (e) => {
+        todoForm.addEventListener('submit', (e) => {
             e.preventDefault();
             this.createTodo();
         });
 
         // Edit form submission
-        document.getElementById('edit-form').addEventListener('submit', (e) => {
+        editForm.addEventListener('submit', (e) => {
             e.preventDefault();
             this.updateTodo();
         });
@@ -348,19 +370,35 @@ class PixelTodoApp {
 
     // Utility Methods
     showLoading() {
-        document.getElementById('loading').classList.remove('hidden');
+        const loadingElement = document.getElementById('loading');
+        if (loadingElement) {
+            loadingElement.classList.remove('hidden');
+        } else {
+            console.warn('⚠️ Elemento #loading no encontrado');
+        }
     }
 
     hideLoading() {
-        document.getElementById('loading').classList.add('hidden');
+        const loadingElement = document.getElementById('loading');
+        if (loadingElement) {
+            loadingElement.classList.add('hidden');
+        } else {
+            console.warn('⚠️ Elemento #loading no encontrado');
+        }
     }
 
     showToast(message, type = 'info') {
+        const toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) {
+            console.warn('⚠️ Elemento #toast-container no encontrado');
+            return;
+        }
+        
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
         toast.textContent = message;
         
-        document.getElementById('toast-container').appendChild(toast);
+        toastContainer.appendChild(toast);
         
         // Auto remove after 3 seconds
         setTimeout(() => {
@@ -379,7 +417,13 @@ class PixelTodoApp {
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    window.app = new PixelTodoApp();
+    console.log('🚀 DOM cargado, inicializando aplicación...');
+    try {
+        window.app = new PixelTodoApp();
+        console.log('✅ Aplicación inicializada exitosamente');
+    } catch (error) {
+        console.error('❌ Error al inicializar la aplicación:', error);
+    }
 });
 
 // Keyboard shortcuts

@@ -1,0 +1,41 @@
+# Archivos y directorios a excluir del contexto de Docker
+
+# Control de versiones
+.git
+.gitignore
+
+# Archivos de Node.js (si los hubiera)
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de IDE/Editor
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Archivos de logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Archivos de backup
+*.bak
+*.backup
+
+# README y documentación de desarrollo
+README.md

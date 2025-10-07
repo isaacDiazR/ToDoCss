@@ -38,4 +38,62 @@ La app consume la API REST: `https://todoapitest.juansegaliz.com/todos`
 - Tipografía pixel "Press Start 2P"
 - Interfaz intuitiva con feedback visual
 
+## 🐳 Docker
+
+### Requisitos previos
+- Docker
+- Docker Compose
+
+### Instalación y uso
+
+#### Opción 1: Usando el script de ayuda (Windows)
+```powershell
+# Construir la imagen
+.\docker-helper.ps1 build
+
+# Iniciar en producción (puerto 3000)
+.\docker-helper.ps1 start
+
+# Iniciar en desarrollo (puerto 8080)
+.\docker-helper.ps1 dev
+
+# Ver estado
+.\docker-helper.ps1 status
+
+# Ver logs
+.\docker-helper.ps1 logs
+
+# Detener
+.\docker-helper.ps1 stop
+
+# Limpiar todo
+.\docker-helper.ps1 clean
+```
+
+#### Opción 2: Comandos Docker directos
+```bash
+# Construir y iniciar en producción
+docker-compose up -d todo-app
+
+# Construir y iniciar en desarrollo
+docker-compose --profile development up -d todo-dev
+
+# Ver logs
+docker-compose logs -f
+
+# Detener
+docker-compose down
+```
+
+### Puertos
+- **Producción**: http://localhost:3000
+- **Desarrollo**: http://localhost:8080
+
+### Características Docker
+- ✅ Imagen optimizada con Nginx Alpine
+- ✅ Configuración de headers de seguridad
+- ✅ Cache de assets estáticos
+- ✅ Modo desarrollo con hot reload
+- ✅ Red interna para futuras extensiones
+
 ---
