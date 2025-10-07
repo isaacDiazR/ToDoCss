@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Todo App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🎮 ToDo - CSS 🎮</h1>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">TOTAL:</span>
+                    <span id="total-count" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">COMPLETADAS:</span>
+                    <span id="completed-count" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">PENDIENTES:</span>
+                    <span id="pending-count" class="stat-value">0</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <!-- Pantalla de Carga -->
+            <div id="loading" class="loading hidden">
+                <div class="pixel-loader">
+                    <div class="loader-bar"></div>
+                    <div class="loader-text">CARGANDO...</div>
+                </div>
+            </div>
+
+            <!-- Formulario Agregar Tarea -->
+            <section class="add-todo-section">
+                <div class="form-container">
+                    <h2 class="section-title">+ NUEVA TAREA +</h2>
+                    <form id="todo-form" class="todo-form">
+                        <div class="input-group">
+                            <label for="todo-title" class="input-label">TÍTULO:</label>
+                            <input type="text" id="todo-title" name="title" class="pixel-input" maxlength="50" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="todo-description" class="input-label">DESCRIPCIÓN:</label>
+                            <textarea id="todo-description" name="description" class="pixel-textarea" maxlength="200" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="pixel-button pixel-button-primary">
+                            <span class="button-text">CREAR TAREA</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Filtros -->
+            <section class="filters-section">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">TODAS</button>
+                    <button class="filter-btn" data-filter="pending">PENDIENTES</button>
+                    <button class="filter-btn" data-filter="completed">COMPLETADAS</button>
+                </div>
+            </section>
+
+            <!-- Lista de Tareas -->
+            <section class="todo-list-section">
+                <div id="todos-container" class="todos-container">
+                    <!-- Todos will be inserted here -->
+                </div>
+                <div id="empty-state" class="empty-state hidden">
+                    <div class="empty-icon">📝</div>
+                    <h3>NO SE ENCONTRARON TAREAS</h3>
+                    <p>¡COMIENZA TU AVENTURA CREANDO UNA NUEVA TAREA!</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal de Edición -->
+        <div id="edit-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">✏️ EDITAR TAREA</h3>
+                    <button class="modal-close" id="close-modal">&times;</button>
+                </div>
+                <form id="edit-form" class="edit-form">
+                    <input type="hidden" id="edit-id">
+                    <div class="input-group">
+                        <label for="edit-title" class="input-label">TÍTULO:</label>
+                        <input type="text" id="edit-title" name="title" class="pixel-input" maxlength="50" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="edit-description" class="input-label">DESCRIPCIÓN:</label>
+                        <textarea id="edit-description" name="description" class="pixel-textarea" maxlength="200" rows="3"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="edit-completed" name="isCompleted" class="pixel-checkbox">
+                            <span class="checkbox-text">TAREA COMPLETADA</span>
+                        </label>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" class="pixel-button pixel-button-primary">
+                            <span class="button-text">GUARDAR CAMBIOS</span>
+                        </button>
+                        <button type="button" class="pixel-button pixel-button-secondary" id="cancel-edit">
+                            <span class="button-text">CANCELAR</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmación de Eliminación -->
+        <div id="delete-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">⚠️ ELIMINAR TAREA</h3>
+                    <button class="modal-close" id="close-delete-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>¿ESTÁS SEGURO DE QUE QUIERES ELIMINAR ESTA TAREA?</p>
+                    <p class="warning-text">¡ESTA ACCIÓN NO SE PUEDE DESHACER!</p>
+                </div>
+                <div class="modal-actions">
+                    <button id="confirm-delete" class="pixel-button pixel-button-danger">
+                        <span class="button-text">ELIMINAR</span>
+                    </button>
+                    <button id="cancel-delete" class="pixel-button pixel-button-secondary">
+                        <span class="button-text">CANCELAR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container" class="toast-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
